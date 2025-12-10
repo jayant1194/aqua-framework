@@ -16,6 +16,7 @@ class Podclient():
     def wait_pod_ready(self,pod_name,namespace,timeout=60):
 
         for i in range(timeout):
+            print(f"Checking pod {pod_name} in namespace {namespace}")
             result=self.api.get(name=pod_name,namespace=namespace)
             if result.status.phase=='Running':
                 return result
