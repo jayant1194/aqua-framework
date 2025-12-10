@@ -79,7 +79,7 @@ class ApiClient(K8BaseClient):
     def get(self,namespace,name,kind='Pod'):
 
         if kind=="Pod":
-            return self.core.read_namespaced_pod(namespace,name)
+            return self.core.read_namespaced_pod(name=name,namespace=namespace)
         raise NotImplementedError()
 
 
