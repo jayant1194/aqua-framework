@@ -11,7 +11,7 @@ def k8_client():
     return k8sfacade(client)
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="session",autouse=True)
 def create_namespace(aqua_client):
      return aqua_client.namespace.create_ns(name="jayanth")
 

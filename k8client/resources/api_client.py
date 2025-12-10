@@ -36,7 +36,7 @@ class ApiClient(K8BaseClient):
         elif kind=="Service":
             self.core.delete_namespaced_service(namespace,name)
         elif kind=="Namespace":
-            return self.core.delete_namespace(namepace)
+            return self.core.delete_namespace(name)
         else:
             raise Exception(f"kind {kind} is not supported")
     def apply(self,namespace="default",yaml_path=None,manifest=None):
@@ -44,7 +44,10 @@ class ApiClient(K8BaseClient):
 
         kind=manifest["kind"]
         name=manifest['metadata']['name']
-        namespace=manifest['metadata']['namespace']
+        if kind != "Namespace":
+            if "namespace" in manifest["metadata"]:
+                namespace = manifest["metadata"]["namespace"]
+
         if kind=="Pod":
             return self.core.create_namespaced_pod(namespace,manifest)
         elif kind=="Deployment":
