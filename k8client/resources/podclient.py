@@ -22,7 +22,7 @@ class Podclient():
             time.sleep(1)
         raise Exception(f"pod is not running state {pod_name}")
 
-    def exec_pod(self,pod_name,namespace,command,container):
+    def exec_pod(self,pod_name,namespace,command,container=None):
 
         return self.api.exec_pod(name=pod_name,namespace=namespace,command=command,container=container)
     def delete_pod(self,pod_name,name):
