@@ -9,7 +9,7 @@ def test_pod_lifecycle(aqua_client,namespace="jayanth"):
     #verify pod running
     #exec into pod and
     command=["curl", "-vso", "/dev/null", "http://localhost:80"]
-    result=aqua_client.pods.exec_pod(pod_nanme=pod_name,namespace=namespace,command=command)
+    result=aqua_client.pods.exec_pod(pod_name=pod_name,namespace=namespace,command=command)
     print(result)
 
 
