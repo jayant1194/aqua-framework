@@ -63,7 +63,7 @@ class ApiClient(K8BaseClient):
 
     def exec_pod(self,pod_name,namespace,command,container):
         try:
-            output=stream(func=self.core.connect_get_namespaced_pod_exec,namespace=namespace,name=pod_name,command=command,container=container,stderr=True,stdin=False,stdout=True,tty=False)
+            output=stream(self.core.connect_get_namespaced_pod_exec,namespace=namespace,name=pod_name,command=command,container=container,stderr=True,stdin=False,stdout=True,tty=False)
             return output
         except client.exceptions.ApiException as e:
             raise Exception(f" unable to exec into pod {pod_name} : {e}")
