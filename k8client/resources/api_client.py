@@ -1,4 +1,4 @@
-from k8_base_client import K8BaseClient
+from .k8_base_client import K8BaseClient
 from kubernetes import client,config
 import yaml
 from pathlib import Path
@@ -13,7 +13,7 @@ class ApiClient(K8BaseClient):
         self.core=client.CoreV1Api()
         self.apps=client.AppsV1Api()
 
-    yaml_dict = yaml.safe_load(Path("data.yml").read_text())
+
 
     def list(self,namespace,kind='pod'):
         if kind=='pod':
@@ -35,6 +35,8 @@ class ApiClient(K8BaseClient):
             self.apps.delete_namespaced_deployment(namespace,name)
         elif kind=="Service":
             self.core.delete_namespaced_service(namespace,name)
+        elif kind=="Namespace":
+            return self.core.delete_namespace(namepace)
         else:
             raise Exception(f"kind {kind} is not supported")
     def apply(self,namespace="default",yaml_path=None,manifest=None):
@@ -51,6 +53,8 @@ class ApiClient(K8BaseClient):
             self.core.create_namespaced_service(namespace,manifest)
         elif kind=="ConfigMap":
             return self.core.create_namespaced_config_map(namespace,manifest)
+        elif kind=="Namespace":
+            return self.core.create_namespace(manifest)
         else:
             raise Exception(f"some error is not supported")
 
