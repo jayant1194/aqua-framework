@@ -30,7 +30,7 @@ class ApiClient(K8BaseClient):
     def delete(self,namespace,name,kind="Pod"):
 
         if  kind=="Pod":
-            self.core.delete_namespaced_pod(namespace,name)
+            self.core.delete_namespaced_pod(name=name,namespace=namespace)
         elif kind=="Deployment":
             self.apps.delete_namespaced_deployment(namespace,name)
         elif kind=="Service":

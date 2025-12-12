@@ -26,7 +26,7 @@ class Podclient():
     def exec_pod(self,pod_name,namespace,command,container=None):
 
         return self.api.exec_pod(pod_name=pod_name,namespace=namespace,command=command,container=container)
-    def delete_pod(self,pod_name,name):
-        return self.api.delete(pod_name=pod_name,name=name)
+    def delete_pod(self,pod_name,namespace):
+        return self.api.delete(name=pod_name,namespace=namespace)
     def get_logs(self,name,namespace):
         return self.api.get_logs(pod_name=name,namespace=namespace)
