@@ -11,6 +11,7 @@ def test_pod_lifecycle(aqua_client,namespace="jayanth"):
     command=["curl", "-vso", "/dev/null", "http://localhost:80"]
     result=aqua_client.pods.exec_pod(pod_name=pod_name,namespace=namespace,command=command)
     print(result)
+    aqua_client.pods.get_logs(pod_name,namespace)
 
 
 
