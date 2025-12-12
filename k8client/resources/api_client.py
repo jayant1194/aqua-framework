@@ -19,7 +19,7 @@ class ApiClient(K8BaseClient):
         if kind=='pod':
 
             pods=self.core.list_namespaced_pod(namespace)
-            list_pod=[pod.metadata.name for pod in pods.items()]
+            list_pod=[pod.metadata.name for pod in pods.items]
             return list_pod
         raise NotImplementedError()
     def get_namespace(self):
