@@ -72,7 +72,7 @@ class ApiClient(K8BaseClient):
 
 
     def get_logs(self,pod_name,namespace):
-        logs=self.core.read_namespaced_pod_log(namespace,pod_name)
+        logs=self.core.read_namespaced_pod_log(pod_name,namespace)
         return logs
 
 
