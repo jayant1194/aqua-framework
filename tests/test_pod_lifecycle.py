@@ -28,7 +28,8 @@ def test_verify_ip_pod(aqua_client,namespace="jayanth"):
     aqua_client.pods.create_pod(name=pod_name,namespace=namespace,image="nginx")
     aqua_client.pods.wait_pod_ready(pod_name, namespace)
     output=aqua_client.pods.get_pod(pod_name,namespace)
-    print(output)
+    print(output.status.pod_ip)
+    assert output.status.pod_ip, "pod ip is not assigned"
 
 
 
