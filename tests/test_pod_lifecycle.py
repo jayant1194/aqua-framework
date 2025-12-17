@@ -7,6 +7,7 @@ def test_pod_lifecycle(aqua_client,namespace="jayanth"):
     print("output..............",output)
     aqua_client.pods.wait_pod_ready(pod_name,namespace)
     #verify pod running
+
     #exec into pod and
     command=["curl", "-vso", "/dev/null", "http://localhost:80"]
     result=aqua_client.pods.exec_pod(pod_name=pod_name,namespace=namespace,command=command)
@@ -19,8 +20,17 @@ def test_pod_lifecycle(aqua_client,namespace="jayanth"):
     check_pod=check_verify_pod(aqua_client,pod_name,namespace)
     assert check_pod,f"pod not deleted ${pod_name}"
 
+def test_verify_ip_pod(aqua_client,pod_name,namespace="jayanth"):
+    aqua_client.pods.create_pod(name=pod_name,namespace=namespace,image="nginx")
+    aqua_client.pods.wait_pod_ready(pod_name, namespace)
+    output=aqua_client.pods.get_pod(pod_name,namespace)
+    print(output)
 
-    #
+
+
+
+
+
 
 
 

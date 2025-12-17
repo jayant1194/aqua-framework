@@ -30,3 +30,5 @@ class Podclient():
         return self.api.delete(name=pod_name,namespace=namespace)
     def get_logs(self,name,namespace):
         return self.api.get_logs(pod_name=name,namespace=namespace)
+    def get_pod(self,name,namespace):
+        return self.api.get(name=name,namespace=namespace)
