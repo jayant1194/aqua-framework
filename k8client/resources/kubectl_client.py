@@ -1,5 +1,5 @@
 import subprocess
-from resources.k8_base_client import K8BaseClient
+from k8_base_client import K8BaseClient
 import time
 
 
