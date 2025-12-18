@@ -1,7 +1,6 @@
 import subprocess
-from k8_base_client import K8BaseClient
+from k8client.resources.k8_base_client import K8BaseClient
 import time
-
 
 class kubectlclient(K8BaseClient):
     def __init__(self,kubeconfig):
