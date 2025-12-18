@@ -36,7 +36,7 @@ def test_verify_ip_pod(aqua_client,namespace="jayanth"):
 @pytest.mark.negative
 def test_verify_negative_pod(aqua_client,kubectl_client,namespace="jayanth"):
     pod_name="jayanth-negative"
-    aqua_client.pods.create_pod(name=pod_name,namespace="jayanth")
+    aqua_client.pods.create_pod(name=pod_name,namespace="jayanth",imgae="jayant-negative")
     time.sleep(30)
     output = aqua_client.pods.get_pod(pod_name, namespace)
     assert output.status.phase=="ImagePullBackOff", f"expected imagepullbackoff but got {output.status.phase}"
