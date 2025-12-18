@@ -1,4 +1,5 @@
 import pytest
+import time
 
 from k8client.utils.pod_helper import check_verify_pod
 
@@ -30,6 +31,17 @@ def test_verify_ip_pod(aqua_client,namespace="jayanth"):
     output=aqua_client.pods.get_pod(pod_name,namespace)
     print(output.status.pod_ip)
     assert output.status.pod_ip, "pod ip is not assigned"
+
+
+@pytest.mark.negative
+def test_verify_negative_pod(aqua_client,kubectl_client,namespace="jayanth"):
+    pod_name="jayanth-negative"
+    aqua_client.pods.create_pod(name=pod_name,namespace="jayanth")
+    time.sleep(30)
+    output = aqua_client.pods.get_pod(pod_name, namespace)
+    assert output.status.phase=="ImagePullBackOff", f"expected imagepullbackoff but got {output.status.phase}"
+    result=kubectl_client.describe_pod(pod_name,namespace)
+    print(result)
 
 
 

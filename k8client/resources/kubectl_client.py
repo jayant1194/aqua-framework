@@ -82,3 +82,7 @@ class kubectlclient(K8BaseClient):
         cmd=f"kubectl get {kind} {name} -n {namespace} --no-headers"
         result=self._run(cmd)
         return result
+    def describe_pod(self,pod_name,namespace):
+        command=f"kubectl describe pod {pod_name} -n {namespace}"
+        result=self._run(command)
+        return result
